@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNotes } from "../context/NotesContext";
 
-const NewNote = ({ handleSaveNote }) => {
+const NewNote = () => {
   const [note, setNote] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  useEffect(() => {
-    console.log(note);
-  }, [note]);
-  const handleInput = (e) => {
-    setNote(e.target.innerText);
-  };
-  const handleEditing = () => {
-    setIsEditing(!isEditing);
-  };
-  //Auto save
+  const { handleSaveNote } = useNotes();
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (note.trim()) {
@@ -26,30 +19,35 @@ const NewNote = ({ handleSaveNote }) => {
     return () => clearTimeout(timer);
   }, [note]);
 
-  //get title
+  const handleInput = (e) => {
+    setNote(e.target.innerText);
+  };
+
+  const handleEditing = () => {
+    setIsEditing(!isEditing);
+  };
+
   const extractTitle = (text) => {
     const firstLine = text.split("\n")[0];
     return firstLine ? firstLine.trim() : "Untitled Note";
   };
-  //get content
+
   const extractContent = (text) => {
     return text.split("\n").slice(1).join("\n").trim();
   };
+
   return (
-    <>
-      <div
-        contentEditable="true"
-        suppressContentEditableWarning={true}
-        onInput={handleInput}
-        onFocus={handleEditing}
-        onBlur={handleEditing}
-        // placeholder="srcibble it! Scribe....."
-      >
-        {note === "" && !isEditing && (
-          <span className="placeholder">srcibble it! Scribe......</span>
-        )}
-      </div>
-    </>
+    <div
+      contentEditable="true"
+      suppressContentEditableWarning={true}
+      onInput={handleInput}
+      onFocus={handleEditing}
+      onBlur={handleEditing}
+    >
+      {note === "" && !isEditing && (
+        <span className="placeholder">Scribble it! Scribe......</span>
+      )}
+    </div>
   );
 };
 

@@ -2,12 +2,14 @@ import { useState } from "react";
 import NewNote from "./pages/newNote";
 import Notes from "./pages/notes";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import NotFound from "./pages/NotFound";
+import { NotesProvider } from "./context/NotesContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Notes />,
-    errorElement: <div className="">oopsie ..... page not found</div>,
+    errorElement: <NotFound />,
   },
   {
     path: "/newNote",
@@ -16,12 +18,9 @@ const router = createBrowserRouter([
 ]);
 function App() {
   return (
-    <>
+    <NotesProvider>
       <RouterProvider router={router} />
-      {/* {" "}
-       */}
-      {/* <h1 className="text-3xl font-bold underline">Hello worldmknklkkn!</h1> */}
-    </>
+    </NotesProvider>
   );
 }
 

@@ -1,16 +1,12 @@
 import React, { useState } from "react";
+import { useNotes } from "../context/NotesContext";
 import NewNote from "./newNote";
 
 const Notes = () => {
-  const [notes, setNotes] = useState([]);
-  const handleSaveNote = (newNote) => {
-    setNotes([newNote, ...notes]);
-  };
-  console.log(notes);
+  const { notes } = useNotes();
   return (
     <div>
-      {/* <NewNote handleSaveNote={handleSaveNote} /> */}
-
+      {/* <NewNote /> */}
       {notes.map((note) => (
         <div key={note.createdAt}>
           <h3>title: {note.title}</h3>
