@@ -4,16 +4,20 @@ import { useNotes } from "../context/NotesContext";
 const NewNote = () => {
   const [note, setNote] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [noteId, setNoteId] = useState(null); // New state to track note ID
   const { handleSaveNote } = useNotes();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (note.trim()) {
-        handleSaveNote({
+        const newNote = {
+          id: noteId || new Date().getTime(), // Use existing ID or create new one
           title: extractTitle(note),
           content: extractContent(note),
-          createdAt: new Date(),
-        });
+          createdAt: noteId ? new Date(noteId) : new Date(), // Use same creation time if editing
+        };
+        handleSaveNote(newNote);
+        setNoteId(newNote.id); // Keep track of the note's ID
       }
     }, 1000);
     return () => clearTimeout(timer);

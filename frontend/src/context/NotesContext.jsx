@@ -12,11 +12,25 @@ export const NotesProvider = ({ children }) => {
   });
 
   const handleSaveNote = (newNote) => {
-    const updatedNotes = [newNote, ...notes];
-    setNotes(updatedNotes);
-    // Save to localStorage
-    localStorage.setItem("notes", JSON.stringify(updatedNotes));
+    setNotes((prevNotes) => {
+      const existingNoteIndex = prevNotes.findIndex(
+        (note) => note.id === newNote.id
+      );
+      if (existingNoteIndex !== -1) {
+        // Update the existing note
+        const updatedNotes = [...prevNotes];
+        updatedNotes[existingNoteIndex] = newNote;
+        localStorage.setItem("notes", JSON.stringify(updatedNotes));
+        return updatedNotes;
+      } else {
+        // Add new note
+        const updatedNotes = [newNote, ...prevNotes];
+        localStorage.setItem("notes", JSON.stringify(updatedNotes));
+        return updatedNotes;
+      }
+    });
   };
+
   return (
     <NotesContext.Provider value={{ notes, handleSaveNote }}>
       {children}
