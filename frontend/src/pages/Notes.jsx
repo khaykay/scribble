@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNotes } from "../context/NotesContext";
 import NewNote from "./newNote";
+import AddNote from "../components/AddNote";
 
 const Notes = () => {
   const { notes } = useNotes();
@@ -38,6 +39,7 @@ const Notes = () => {
           </div>
         ))}
       </div>
+      <AddNote />
     </div>
   );
 };
