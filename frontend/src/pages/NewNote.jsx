@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNotes } from "../context/NotesContext";
+import AddNote from "../components/AddNote";
+import BackButton from "../components/BackButton";
 
 const NewNote = () => {
   const [note, setNote] = useState("");
@@ -41,17 +43,21 @@ const NewNote = () => {
   };
 
   return (
-    <div
-      contentEditable="true"
-      suppressContentEditableWarning={true}
-      onInput={handleInput}
-      onFocus={handleEditing}
-      onBlur={handleEditing}
-    >
-      {note === "" && !isEditing && (
-        <span className="placeholder">Scribble it! Scribe......</span>
-      )}
-    </div>
+    <>
+      <BackButton />
+      <div
+        contentEditable="true"
+        suppressContentEditableWarning={true}
+        onInput={handleInput}
+        onFocus={handleEditing}
+        onBlur={handleEditing}
+      >
+        {note === "" && !isEditing && (
+          <span className="placeholder">Scribble it! Scribe......</span>
+        )}
+      </div>
+      <AddNote />
+    </>
   );
 };
 
