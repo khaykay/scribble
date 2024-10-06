@@ -39,7 +39,7 @@ export const NotesProvider = ({ children }) => {
   };
 
   //function to create new folders
-  const handleCreateFolder = (folderName, notesToInclude) => {
+  const handleCreateFolderDragNDrop = (folderName, notesToInclude) => {
     const newFolder = {
       id: new Date().getTime(),
       name: folderName,
@@ -53,10 +53,28 @@ export const NotesProvider = ({ children }) => {
       return updatedFolders;
     });
   };
+  const handleCreateFolder = (folderName) => {
+    setFolders((prevFolders) => {
+      const newFolder = {
+        id: new Date().getTime(),
+        name: folderName,
+        notes: [],
+      };
+      const updatedFolders = [...prevFolders, newFolder];
+      localStorage.setItem("folders", JSON.stringify(updatedFolders));
+      return updatedFolders;
+    });
+  };
 
   return (
     <NotesContext.Provider
-      value={{ notes, handleSaveNote, folders, handleCreateFolder }}
+      value={{
+        notes,
+        handleSaveNote,
+        folders,
+        handleCreateFolder,
+        handleCreateFolderDragNDrop,
+      }}
     >
       {children}
     </NotesContext.Provider>

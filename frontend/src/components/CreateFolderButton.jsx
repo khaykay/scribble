@@ -1,11 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
+import { useNotes } from "../context/NotesContext";
 
 function CreateFolderButton() {
+  const [showModal, setShowModal] = useState(false);
+  const [folderName, setFolderName] = useState();
+  const { handleCreateFolder } = useNotes();
+
+  const openModal = () => {
+    setShowModal(true);
+    setFolderName("New Folder");
+  };
+  const closeModal = () => {
+    setShowModal(false);
+  };
+  const saveFolder = () => {
+    if (folderName.trim()) {
+      handleCreateFolder(folderName);
+      closeModal();
+    }
+  };
+  const handleFolderNameInputChange = (e) => {
+    setFolderName(e.target.value);
+  };
+  const openModalStyle = "bg-blue-500 text-white px-4 py-2 rounded";
   return (
     <div>
-      CreateFolderButton
-      <Button></Button>
+      <Button onClick={openModal} style={openModalStyle}>
+        create Folder
+      </Button>
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
+          <div className="bg-white p-6 rounded-lg w-80">
+            <h2 className="text-lg font-bold mb-4">Create New Folder</h2>
+            <input
+              type="text"
+              value={folderName}
+              onChange={handleFolderNameInputChange}
+              className="border border-gray-300 rounded w-full p-2"
+              autoFocus
+              onFocus={(e) => e.target.select()} // Highlight the initial value
+            />
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={closeModal}
+                className="bg-gray-300 text-black px-4 py-2 rounded mr-2"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={saveFolder}
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

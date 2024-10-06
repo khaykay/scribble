@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNotes } from "../context/NotesContext";
 import NewNote from "./newNote";
 import AddNote from "../components/AddNote";
+import CreateFolderButton from "../components/CreateFolderButton";
 
 const Notes = () => {
   const { notes } = useNotes();
@@ -42,6 +43,7 @@ const Notes = () => {
             favorite
           </span>
         </li>
+        <CreateFolderButton />
       </nav>
       <div className="flex flex-wrap gap-y-4 gap-x-2 w-full  md:w-[100%]  md:col-start-2 md:justify-between  md:px-8 md:pt-8">
         {notes.map((note, index) => (
