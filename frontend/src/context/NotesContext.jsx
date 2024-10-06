@@ -5,12 +5,19 @@ const NotesContext = createContext();
 
 // Create a provider component
 export const NotesProvider = ({ children }) => {
+  // state to handle notes
   const [notes, setNotes] = useState(() => {
     // Load from localStorage on initial render
     const storedNotes = localStorage.getItem("notes");
     return storedNotes ? JSON.parse(storedNotes) : [];
   });
+  // state to handle folder
+  const [folders, setFolders] = useState(() => {
+    const storedFolders = localStorage.getItem("folders");
+    return storedFolders ? JSON.parse(storedFolders) : [];
+  });
 
+  //function to save notes
   const handleSaveNote = (newNote) => {
     setNotes((prevNotes) => {
       const existingNoteIndex = prevNotes.findIndex(
@@ -31,8 +38,26 @@ export const NotesProvider = ({ children }) => {
     });
   };
 
+  //function to create new folders
+  const handleCreateFolder = (folderName, notesToInclude) => {
+    const newFolder = {
+      id: new Date().getTime(),
+      name: folderName,
+      notes: notesToInclude,
+    };
+
+    // Add the new folder to the folders array
+    setFolders((prevFolders) => {
+      const updatedFolders = [newFolder, ...prevFolders];
+      localStorage.setItem("folders", JSON.stringify(updatedFolders));
+      return updatedFolders;
+    });
+  };
+
   return (
-    <NotesContext.Provider value={{ notes, handleSaveNote }}>
+    <NotesContext.Provider
+      value={{ notes, handleSaveNote, folders, handleCreateFolder }}
+    >
       {children}
     </NotesContext.Provider>
   );
