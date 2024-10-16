@@ -1,11 +1,28 @@
 import React, { useState } from "react";
 import { useNotes } from "../context/NotesContext";
-import NewNote from "./newNote";
 import AddNote from "../components/AddNote";
 import CreateFolderButton from "../components/CreateFolderButton";
+import Folders from "./Folders";
 
 const Notes = () => {
-  const { notes } = useNotes();
+  const { notes, handleCreateFolder } = useNotes();
+  const [draggedNote, setDraggedNote] = useState();
+  const handleDragStart = (note) => {
+    setDraggedNote(note);
+  };
+  const handleDrop = (targetNote) => {
+    if (draggedNote && draggedNote.id !== targetNote.id) {
+      // Create a new folder with the dragged and target notes as children
+      const newFolder = {
+        id: new Date().getTime(),
+        title: `Folder ${new Date().toLocaleString()}`,
+        notes: [draggedNote, targetNote],
+        createdAt: new Date(),
+      };
+      handleCreateFolder(newFolder);
+      setDraggedNote(null);
+    }
+  };
   const colors = [
     "bg-yellow-200",
     "bg-green-200",
@@ -14,9 +31,7 @@ const Notes = () => {
     "bg-purple-200",
     "bg-red-200",
   ];
-  const truncateText = (text, maxLength) => {
-    return text.length > maxLength ? text.slice(0, maxLength) + " ..." : text;
-  };
+
   return (
     <div className="px-4 flex flex-col gap-y-6 md:grid md:grid-cols-[110px_1fr] md:grid-rows-1 md: gap-x-5 md:gap-y-0">
       <header className="text-6xl md:col-start-2">My Notes</header>
@@ -49,6 +64,10 @@ const Notes = () => {
         {notes.map((note, index) => (
           <div
             key={index}
+            draggable
+            onDragStart={() => handleDragStart(note)}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={() => handleDrop(note)}
             className={`${colors[index % colors.length]} ${
               index % 2 === 0
                 ? "rounded-tl-none rounded-tr-3xl rounded-b-3xl"
@@ -69,6 +88,7 @@ const Notes = () => {
             <small>{note.createdAt.toLocaleString()}</small>
           </div>
         ))}
+        <Folders />
       </div>
     </div>
   );

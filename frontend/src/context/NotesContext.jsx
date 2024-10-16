@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 // Create a context
 const NotesContext = createContext();
@@ -16,7 +16,10 @@ export const NotesProvider = ({ children }) => {
     const storedFolders = localStorage.getItem("folders");
     return storedFolders ? JSON.parse(storedFolders) : [];
   });
-
+  //useEffect to view folders
+  useEffect(() => {
+    console.log(folders);
+  }, [folders]);
   //function to save notes
   const handleSaveNote = (newNote) => {
     setNotes((prevNotes) => {
