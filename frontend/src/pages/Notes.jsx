@@ -3,10 +3,15 @@ import { useNotes } from "../context/NotesContext";
 import AddNote from "../components/AddNote";
 import CreateFolderButton from "../components/CreateFolderButton";
 import Folders from "./Folders";
+import { useNavigate } from "react-router-dom";
 
 const Notes = () => {
   const { notes, handleCreateFolder } = useNotes();
   const [draggedNote, setDraggedNote] = useState();
+  const navigate = useNavigate();
+  const handleNavigateFoldersPage = () => {
+    navigate("./folders");
+  };
   const handleDragStart = (note) => {
     setDraggedNote(note);
   };
@@ -46,7 +51,10 @@ const Notes = () => {
             {notes.length}
           </span>
         </li>
-        <li className="border border-solid border-slate-700 rounded-3xl p-3 md:h-14 md:w-14 ">
+        <li
+          className="border border-solid border-slate-700 rounded-3xl p-3 md:h-14 md:w-14 "
+          onClick={handleNavigateFoldersPage}
+        >
           <span className="md:hidden">Folders</span>
           <span class="material-symbols-outlined hidden md:inline-block">
             folder
@@ -88,7 +96,6 @@ const Notes = () => {
             <small>{note.createdAt.toLocaleString()}</small>
           </div>
         ))}
-        <Folders />
       </div>
     </div>
   );
