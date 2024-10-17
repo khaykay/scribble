@@ -19,6 +19,7 @@ export const NotesProvider = ({ children }) => {
   //useEffect to view folders
   useEffect(() => {
     console.log(folders);
+    console.log(notes);
   }, [folders]);
   //function to save notes
   const handleSaveNote = (newNote) => {

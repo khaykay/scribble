@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNotes } from "../context/NotesContext";
 import AddNote from "../components/AddNote";
 import CreateFolderButton from "../components/CreateFolderButton";
@@ -14,8 +14,13 @@ const Notes = () => {
   };
   const handleDragStart = (note) => {
     setDraggedNote(note);
+    // console.log(note);
   };
+  // useEffect(() => {
+  //   console.log(draggedNote);
+  // }, [draggedNote]);
   const handleDrop = (targetNote) => {
+    // console.log(targetNote);
     if (draggedNote && draggedNote.id !== targetNote.id) {
       // Create a new folder with the dragged and target notes as children
       const newFolder = {
@@ -68,7 +73,7 @@ const Notes = () => {
         </li>
         <CreateFolderButton />
       </nav>
-      <div className="flex flex-wrap gap-y-4 gap-x-2 w-full  md:w-[100%]  md:col-start-2 md:justify-between  md:px-8 md:pt-8">
+      <div className="flex flex-wrap gap-y-4 gap-x-2 w-full  md:w-[100%]  md:col-start-2  md:px-8 md:pt-8">
         {notes.map((note, index) => (
           <div
             key={index}
