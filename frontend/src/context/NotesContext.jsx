@@ -16,10 +16,9 @@ export const NotesProvider = ({ children }) => {
     const storedFolders = localStorage.getItem("folders");
     return storedFolders ? JSON.parse(storedFolders) : [];
   });
-  //useEffect to view folders
+
   useEffect(() => {
     console.log(folders);
-    console.log(notes);
   }, [folders]);
   //function to save notes
   const handleSaveNote = (newNote) => {
@@ -42,12 +41,12 @@ export const NotesProvider = ({ children }) => {
     });
   };
 
-  //function to create new folders
+  //function to create new foldersDragNDrop
   const handleCreateFolderDragNDrop = (folderName, notesToInclude) => {
     const newFolder = {
       id: new Date().getTime(),
       name: folderName,
-      noteszzzzz: notesToInclude,
+      notes: notesToInclude,
     };
 
     // Add the new folder to the folders array
@@ -57,6 +56,7 @@ export const NotesProvider = ({ children }) => {
       return updatedFolders;
     });
   };
+  //function to create new folders
   const handleCreateFolder = (folderName) => {
     setFolders((prevFolders) => {
       const newFolder = {
