@@ -6,7 +6,7 @@ import Folders from "./Folders";
 import { useNavigate } from "react-router-dom";
 
 const Notes = () => {
-  const { notes, handleCreateFolder } = useNotes();
+  const { notes, handleCreateFolder, handleCreateFolderDragNDrop } = useNotes();
   const [draggedNote, setDraggedNote] = useState();
   const navigate = useNavigate();
   const handleNavigateFoldersPage = () => {
@@ -14,13 +14,9 @@ const Notes = () => {
   };
   const handleDragStart = (note) => {
     setDraggedNote(note);
-    // console.log(note);
   };
-  // useEffect(() => {
-  //   console.log(draggedNote);
-  // }, [draggedNote]);
+
   const handleDrop = (targetNote) => {
-    // console.log(targetNote);
     if (draggedNote && draggedNote.id !== targetNote.id) {
       // Create a new folder with the dragged and target notes as children
       const newFolder = {
@@ -29,7 +25,9 @@ const Notes = () => {
         notes: [draggedNote, targetNote],
         createdAt: new Date(),
       };
-      handleCreateFolder(newFolder);
+      let notesToInclude = newFolder.notes;
+      let folderName = newFolder.title;
+      handleCreateFolderDragNDrop(folderName, notesToInclude);
       setDraggedNote(null);
     }
   };

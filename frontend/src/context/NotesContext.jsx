@@ -47,7 +47,7 @@ export const NotesProvider = ({ children }) => {
     const newFolder = {
       id: new Date().getTime(),
       name: folderName,
-      notes: notesToInclude,
+      noteszzzzz: notesToInclude,
     };
 
     // Add the new folder to the folders array

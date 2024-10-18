@@ -5,6 +5,7 @@ import CreateFolderButton from "../components/CreateFolderButton";
 
 function Folders() {
   const { folders } = useNotes();
+  console.log(folders);
   return (
     <div>
       <BackButton />
