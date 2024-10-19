@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNotes } from "../context/NotesContext";
 import AddNote from "../components/AddNote";
 import CreateFolderButton from "../components/CreateFolderButton";
-import Folders from "./Folders";
+// import Folders from "./Folders";
 import { useNavigate } from "react-router-dom";
 
 const Notes = () => {
-  const { notes, handleCreateFolder, handleCreateFolderDragNDrop } = useNotes();
+  const { notes, handleCreateFolderDragNDrop } = useNotes();
   const [draggedNote, setDraggedNote] = useState();
   const navigate = useNavigate();
   const handleNavigateFoldersPage = () => {
@@ -96,7 +96,7 @@ const Notes = () => {
               </div>
             </div>
             <p>{note.content}</p>
-            <small>{note.createdAt.toLocaleString()}</small>
+            <small>{new Date(note.createdAt).toLocaleString()}</small>
           </div>
         ))}
       </div>

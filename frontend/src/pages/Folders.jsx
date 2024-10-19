@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNotes } from "../context/NotesContext";
 import BackButton from "../components/BackButton";
 import CreateFolderButton from "../components/CreateFolderButton";
+import folderImg from "../assets/folderImg.png";
 
 function Folders() {
   const { folders } = useNotes();
@@ -14,7 +15,7 @@ function Folders() {
   return (
     <div className="bg-slate-50 h-screen">
       <BackButton />
-      <div className="flex flex-wrap gap-3 p-4">
+      <div className="flex flex-wrap gap-x-2 gap-y-3 p-4">
         {folders.length !== 0 ? (
           folders.map((folder) => (
             <div
@@ -22,6 +23,9 @@ function Folders() {
               className="h-56 w-[calc(50%-4px)] md:w-64 bg-slate-500 p-4 rounded-lg cursor-pointer"
               onClick={() => handleClickToOpenFolder(folder.id)}
             >
+              {folder.notes.length > 0 && (
+                <img src={folderImg} alt="" srcset="" />
+              )}
               <h3 className="text-white font-bold">
                 {typeof folder.name === "string"
                   ? folder.name
@@ -47,8 +51,9 @@ function Folders() {
           <h3>No folders yet. Add one?</h3>
         )}
       </div>
-
-      <CreateFolderButton />
+      <div className="fixed bottom-4 right-4">
+        <CreateFolderButton />
+      </div>
     </div>
   );
 }

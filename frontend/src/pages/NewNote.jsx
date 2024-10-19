@@ -17,7 +17,7 @@ const NewNote = () => {
           id: noteId || new Date().getTime(), // Use existing ID or create new one
           title: extractTitle(note),
           content: extractContent(note),
-          createdAt: noteId ? new Date(noteId) : new Date(), // Use same creation time if editing
+          createdAt: noteId ? new Date(noteId) : new Date().toISOString(), // Use same creation time if editing
         };
         handleSaveNote(newNote);
         setNoteId(newNote.id); // Keep track of the note's ID

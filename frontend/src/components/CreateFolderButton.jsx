@@ -24,7 +24,7 @@ function CreateFolderButton() {
     setFolderName(e.target.value);
   };
   const style =
-    "fixed bottom-4 right-4 bg-blue-500 text-white rounded-full shadow-lg z-10 md:relative md:h-14 md:w-14 md:bg-slate-200 md:bottom-0 md:right-0";
+    " h-14 w-14 bg-blue-500 text-white rounded-full shadow-lg z-10 md:relative md:h-14 md:w-14 md:bg-slate-200 md:bottom-0 md:right-0";
   return (
     <div className="">
       <Button onClick={openModal} style={style}>
