@@ -16,12 +16,12 @@ export const NotesProvider = ({ children }) => {
     const storedFolders = localStorage.getItem("folders");
     return storedFolders ? JSON.parse(storedFolders) : [];
   });
-  useEffect(() => {
-    console.log(notes);
-  }, []);
-  useEffect(() => {
-    console.log(folders);
-  }, [folders]);
+  // useEffect(() => {
+  //   console.log(notes);
+  // }, []);
+  // useEffect(() => {
+  //   console.log(folders);
+  // }, [folders]);
   //function to save notes
   const handleSaveNote = (newNote) => {
     setNotes((prevNotes) => {

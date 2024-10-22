@@ -51,7 +51,7 @@ function Folders() {
           <h3>No folders yet. Add one?</h3>
         )}
       </div>
-      <div className="fixed bottom-4 right-4">
+      <div className="fixed bottom-4 right-4 h-32">
         <CreateFolderButton />
       </div>
     </div>

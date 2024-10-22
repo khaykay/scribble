@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNotes } from "../context/NotesContext";
 import Nav from "../components/Nav";
+import { Link } from "react-router-dom";
 
 const Notes = () => {
   const { notes, handleCreateFolderDragNDrop } = useNotes();
@@ -41,31 +42,34 @@ const Notes = () => {
       </nav>
       <div className="flex flex-wrap gap-y-4 gap-x-2 w-full  md:w-[100%]  md:col-start-2  md:px-8 md:pt-8">
         {notes.map((note, index) => (
-          <div
-            key={index}
-            draggable
-            onDragStart={() => handleDragStart(note)}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={() => handleDrop(note)}
-            className={`${colors[index % colors.length]} ${
-              index % 2 === 0
-                ? "rounded-tl-none rounded-tr-3xl rounded-b-3xl"
-                : "rounded-t-3xl rounded-bl-3xl rounded-br-none"
-            } p-3  h-56 w-[calc(50%-4px)] md:w-64`}
-          >
-            <div className="flex  justify-between">
-              <h3 className="break-words font-semibold text-lg w-20 md:w-[calc(100%-70px)] truncate-two-lines">
-                {note.title}
-              </h3>
-              <div className="h-14 w-14 rounded-full transparent flex justify-center items-center">
-                <span class="material-symbols-outlined text-gray-400">
-                  favorite
-                </span>
+          <>
+            <Link
+              key={note.id}
+              to={`/note/${note.id}`}
+              draggable
+              onDragStart={() => handleDragStart(note)}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={() => handleDrop(note)}
+              className={`${colors[index % colors.length]} ${
+                index % 2 === 0
+                  ? "rounded-tl-none rounded-tr-3xl rounded-b-3xl"
+                  : "rounded-t-3xl rounded-bl-3xl rounded-br-none"
+              } p-3  h-56 w-[calc(50%-4px)] md:w-64`}
+            >
+              <div className="flex  justify-between">
+                <h3 className="break-words font-semibold text-lg w-20 md:w-[calc(100%-70px)] truncate-two-lines">
+                  {note.title}
+                </h3>
+                <div className="h-14 w-14 rounded-full transparent flex justify-center items-center">
+                  <span class="material-symbols-outlined text-gray-400">
+                    favorite
+                  </span>
+                </div>
               </div>
-            </div>
-            <p>{note.content}</p>
-            <small>{new Date(note.createdAt).toLocaleString()}</small>
-          </div>
+              <p>{note.content}</p>
+              <small>{new Date(note.createdAt).toLocaleString()}</small>
+            </Link>
+          </>
         ))}
       </div>
     </div>
