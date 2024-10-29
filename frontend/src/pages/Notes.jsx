@@ -6,6 +6,13 @@ import { Link } from "react-router-dom";
 const Notes = () => {
   const { notes, handleCreateFolderDragNDrop } = useNotes();
   const [draggedNote, setDraggedNote] = useState();
+  const [isFavorite, setIsFavorite] = useState(false);
+  const handleFavorite = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    setIsFavorite((prev) => !prev);
+  };
   const handleDragStart = (note) => {
     setDraggedNote(note);
   };
@@ -60,11 +67,18 @@ const Notes = () => {
                 <h3 className="break-words font-semibold text-lg w-20 md:w-[calc(100%-70px)] truncate-two-lines">
                   {note.title}
                 </h3>
-                <div className="h-14 w-14 rounded-full transparent flex justify-center items-center">
-                  <span class="material-symbols-outlined text-gray-400">
+                <button
+                  className={`h-14 w-14 rounded-full transparent flex justify-center items-center`}
+                  onClick={(e) => handleFavorite(e)}
+                >
+                  <span
+                    class={`material-symbols-outlined ${
+                      isFavorite ? "text-red-600" : "text-gray-400"
+                    }`}
+                  >
                     favorite
                   </span>
-                </div>
+                </button>
               </div>
               <p>{note.content}</p>
               <small>{new Date(note.createdAt).toLocaleString()}</small>
