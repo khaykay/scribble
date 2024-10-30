@@ -4,10 +4,10 @@ import AddNote from "../components/AddNote";
 import BackButton from "../components/BackButton";
 
 const NewNote = () => {
-  const [note, setNote] = useState("");
+  // const [note, setNote] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [noteId, setNoteId] = useState(null); // New state to track note ID
-  const { handleSaveNote } = useNotes();
+  const { handleSaveNote, note, setNote } = useNotes();
   const contentRef = useRef(null);
 
   useEffect(() => {
@@ -17,6 +17,7 @@ const NewNote = () => {
           id: noteId || new Date().getTime(), // Use existing ID or create new one
           title: extractTitle(note),
           content: extractContent(note),
+          favorite: false,
           createdAt: noteId ? new Date(noteId) : new Date().toISOString(), // Use same creation time if editing
         };
         handleSaveNote(newNote);

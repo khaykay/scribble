@@ -6,6 +6,9 @@ const NotesContext = createContext();
 // Create a provider component
 export const NotesProvider = ({ children }) => {
   // state to handle notes
+  //individual note
+  const [note, setNote] = useState("");
+  //all notes
   const [notes, setNotes] = useState(() => {
     // Load from localStorage on initial render
     const storedNotes = localStorage.getItem("notes");
@@ -16,9 +19,9 @@ export const NotesProvider = ({ children }) => {
     const storedFolders = localStorage.getItem("folders");
     return storedFolders ? JSON.parse(storedFolders) : [];
   });
-  // useEffect(() => {
-  //   console.log(notes);
-  // }, []);
+  useEffect(() => {
+    console.log(note);
+  }, [note]);
   // useEffect(() => {
   //   console.log(folders);
   // }, [folders]);
@@ -75,6 +78,8 @@ export const NotesProvider = ({ children }) => {
   return (
     <NotesContext.Provider
       value={{
+        note,
+        setNote,
         notes,
         handleSaveNote,
         folders,

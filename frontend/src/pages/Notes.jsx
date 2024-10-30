@@ -4,13 +4,12 @@ import Nav from "../components/Nav";
 import { Link } from "react-router-dom";
 
 const Notes = () => {
-  const { notes, handleCreateFolderDragNDrop } = useNotes();
+  const { notes, handleCreateFolderDragNDrop, setNote } = useNotes();
   const [draggedNote, setDraggedNote] = useState();
   const [isFavorite, setIsFavorite] = useState(false);
   const handleFavorite = (event) => {
-    event.stopPropagation();
     event.preventDefault();
-
+    event.stopPropagation();
     setIsFavorite((prev) => !prev);
   };
   const handleDragStart = (note) => {
@@ -69,7 +68,10 @@ const Notes = () => {
                 </h3>
                 <button
                   className={`h-14 w-14 rounded-full transparent flex justify-center items-center`}
-                  onClick={(e) => handleFavorite(e)}
+                  onClick={(e) => {
+                    handleFavorite(e);
+                    setNote({ ...note, favorite: !note.favorite });
+                  }}
                 >
                   <span
                     class={`material-symbols-outlined ${
