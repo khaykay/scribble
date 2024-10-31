@@ -15,7 +15,7 @@ const Notes = () => {
   const handleDragStart = (note) => {
     setDraggedNote(note);
   };
-
+  let todayscommit = "nothing to commit today";
   const handleDrop = (targetNote) => {
     if (draggedNote && draggedNote.id !== targetNote.id) {
       // Create a new folder with the dragged and target notes as children
