@@ -3,7 +3,7 @@ import { useNotes } from "../context/NotesContext";
 import BackButton from "../components/BackButton";
 import CreateFolderButton from "../components/CreateFolderButton";
 import folderImg from "../assets/folderImg.png";
-import ArrayManipulation from "./ArrayManipulation";
+import Ball from "./Ball";
 
 function Folders() {
   const { folders } = useNotes();
@@ -27,7 +27,7 @@ function Folders() {
               {folder.notes.length > 0 && (
                 <img src={folderImg} alt="" srcset="" />
               )}
-              <h3 className="text-white font-bold">
+              <h3 className="font-bold">
                 {typeof folder.name === "string"
                   ? folder.name
                   : folder.name.title}
@@ -52,7 +52,7 @@ function Folders() {
           <h3>No folders yet. Add one?</h3>
         )}
       </div>
-      <ArrayManipulation />
+      <Ball />
       <div className="fixed bottom-4 right-4 h-32">
         <CreateFolderButton />
       </div>
