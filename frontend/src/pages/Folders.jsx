@@ -3,7 +3,6 @@ import { useNotes } from "../context/NotesContext";
 import BackButton from "../components/BackButton";
 import CreateFolderButton from "../components/CreateFolderButton";
 import folderImg from "../assets/folderImg.png";
-import Ball from "./Ball";
 
 function Folders() {
   const { folders } = useNotes();
@@ -52,7 +51,7 @@ function Folders() {
           <h3>No folders yet. Add one?</h3>
         )}
       </div>
-      <Ball />
+
       <div className="fixed bottom-4 right-4 h-32">
         <CreateFolderButton />
       </div>
