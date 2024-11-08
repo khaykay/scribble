@@ -4,13 +4,24 @@ import Nav from "../components/Nav";
 import { Link } from "react-router-dom";
 
 const Notes = () => {
-  const { notes, handleCreateFolderDragNDrop, setNote } = useNotes();
+  const { notes, handleCreateFolderDragNDrop, setNotes } = useNotes();
   const [draggedNote, setDraggedNote] = useState();
   const [isFavorite, setIsFavorite] = useState(false);
-  const handleFavorite = (event) => {
+  const handleFavorite = (event, id) => {
     event.preventDefault();
     event.stopPropagation();
-    setIsFavorite((prev) => !prev);
+
+    setIsFavorite((prev) => {
+      const updatedFavorite = !prev;
+
+      setNotes((notes) =>
+        notes.map((note) =>
+          note.id === id ? { ...note, favorite: updatedFavorite } : note
+        )
+      );
+
+      return updatedFavorite;
+    });
   };
   const handleDragStart = (note) => {
     setDraggedNote(note);
@@ -69,13 +80,12 @@ const Notes = () => {
                 <button
                   className={`h-14 w-14 rounded-full transparent flex justify-center items-center`}
                   onClick={(e) => {
-                    handleFavorite(e);
-                    setNote({ ...note, favorite: !note.favorite });
+                    handleFavorite(e, note.id);
                   }}
                 >
                   <span
                     class={`material-symbols-outlined ${
-                      isFavorite ? "text-red-600" : "text-gray-400"
+                      note.favorite ? "text-red-600" : "text-gray-400"
                     }`}
                   >
                     favorite

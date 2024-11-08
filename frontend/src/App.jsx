@@ -6,7 +6,6 @@ import NotFound from "./pages/NotFound";
 import { NotesProvider } from "./context/NotesContext";
 import Folders from "./pages/Folders";
 import Note from "./pages/Note";
-import Ball from "./pages/Ball";
 
 const router = createBrowserRouter([
   {
@@ -25,10 +24,6 @@ const router = createBrowserRouter([
   {
     path: "/note/:noteId",
     element: <Note />,
-  },
-  {
-    path: "/ball",
-    element: <Ball />,
   },
 ]);
 function App() {

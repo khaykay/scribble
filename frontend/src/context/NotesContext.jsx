@@ -79,7 +79,7 @@ export const NotesProvider = ({ children }) => {
     <NotesContext.Provider
       value={{
         note,
-        setNote,
+        setNotes,
         notes,
         handleSaveNote,
         folders,
