@@ -18,7 +18,9 @@ export const NotesProvider = ({ children }) => {
     const storedFolders = localStorage.getItem("folders");
     return storedFolders ? JSON.parse(storedFolders) : [];
   });
-
+  // useEffect(() => {
+  //   console.log(notes);
+  // }, [notes]);
   // useEffect(() => {
   //   console.log(folders);
   // }, [folders]);

@@ -4,7 +4,6 @@ import AddNote from "../components/AddNote";
 import BackButton from "../components/BackButton";
 
 const NewNote = () => {
-  // const [note, setNote] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [noteId, setNoteId] = useState(null); // New state to track note ID
   const { handleSaveNote, note, setNote } = useNotes();

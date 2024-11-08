@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import { NotesProvider } from "./context/NotesContext";
 import Folders from "./pages/Folders";
 import Note from "./pages/Note";
+import Favorites from "./pages/Favorites";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/note/:noteId",
     element: <Note />,
+  },
+  {
+    path: "/favorites",
+    element: <Favorites />,
   },
 ]);
 function App() {

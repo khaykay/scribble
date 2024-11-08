@@ -10,6 +10,9 @@ function Nav() {
   const handleNavigateFoldersPage = () => {
     navigate("./folders");
   };
+  const handleNavigateFavoritesPage = () => {
+    navigate("./favorites");
+  };
   return (
     <>
       <AddNote />
@@ -31,7 +34,10 @@ function Nav() {
           folder
         </span>
       </div>
-      <div className="border border-solid border-slate-700 rounded-3xl p-3 md:h-14 md:w-14 ">
+      <div
+        className="border border-solid border-slate-700 rounded-3xl p-3 md:h-14 md:w-14 "
+        onClick={handleNavigateFavoritesPage}
+      >
         <span className="md:hidden">Favorite</span>
         <span class="material-symbols-outlined text-gray-400 hidden md:inline-block">
           favorite
