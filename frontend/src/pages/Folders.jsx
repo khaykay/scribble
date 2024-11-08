@@ -3,6 +3,7 @@ import { useNotes } from "../context/NotesContext";
 import BackButton from "../components/BackButton";
 import CreateFolderButton from "../components/CreateFolderButton";
 import folderImg from "../assets/folderImg.png";
+import NoteCard from "../components/NoteCard";
 
 function Folders() {
   const { folders } = useNotes();
@@ -16,8 +17,8 @@ function Folders() {
     <div className="bg-slate-50 h-screen">
       <BackButton />
       <div className="flex flex-wrap gap-x-2 gap-y-3 p-4">
-        {folders.length !== 0 ? (
-          folders.map((folder) => (
+        {folders?.length !== 0 ? (
+          folders?.map((folder) => (
             <div
               key={folder.id}
               className="h-56 w-[calc(50%-4px)] md:w-64 bg-slate-500 p-4 rounded-lg cursor-pointer"
@@ -35,11 +36,7 @@ function Folders() {
               {openFolderId === folder.id && (
                 <ul className="mt-2 bg-white p-2 rounded">
                   {folder?.notes?.length !== 0 ? (
-                    folder?.notes?.map((note) => (
-                      <li key={note.id} className="text-black">
-                        {note.title}
-                      </li>
-                    ))
+                    <NoteCard notes={folder.notes} />
                   ) : (
                     <div>empty folder</div>
                   )}

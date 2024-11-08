@@ -24,6 +24,17 @@ export const NotesProvider = ({ children }) => {
   // useEffect(() => {
   //   console.log(folders);
   // }, [folders]);
+
+  // Sync `notes` to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
+
+  // Sync `folders` to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("folders", JSON.stringify(folders));
+  }, [folders]);
+
   //function to save notes
   const handleSaveNote = (newNote) => {
     setNotes((prevNotes) => {
@@ -34,12 +45,11 @@ export const NotesProvider = ({ children }) => {
         // Update the existing note
         const updatedNotes = [...prevNotes];
         updatedNotes[existingNoteIndex] = newNote;
-        localStorage.setItem("notes", JSON.stringify(updatedNotes));
+
         return updatedNotes;
       } else {
         // Add new note
         const updatedNotes = [newNote, ...prevNotes];
-        localStorage.setItem("notes", JSON.stringify(updatedNotes));
         return updatedNotes;
       }
     });
@@ -54,24 +64,17 @@ export const NotesProvider = ({ children }) => {
     };
 
     // Add the new folder to the folders array
-    setFolders((prevFolders) => {
-      const updatedFolders = [newFolder, ...prevFolders];
-      localStorage.setItem("folders", JSON.stringify(updatedFolders));
-      return updatedFolders;
-    });
+    setFolders((prevFolders) => [newFolder, ...prevFolders]);
   };
-  //function to create new folders
+
+  // Function to create a new folder
   const handleCreateFolder = (folderName) => {
-    setFolders((prevFolders) => {
-      const newFolder = {
-        id: new Date().getTime(),
-        name: folderName,
-        notes: [],
-      };
-      const updatedFolders = [...prevFolders, newFolder];
-      localStorage.setItem("folders", JSON.stringify(updatedFolders));
-      return updatedFolders;
-    });
+    const newFolder = {
+      id: new Date().getTime(),
+      name: folderName,
+      notes: [],
+    };
+    setFolders((prevFolders) => [...prevFolders, newFolder]);
   };
 
   return (

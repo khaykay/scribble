@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNotes } from "../context/NotesContext";
 import Nav from "../components/Nav";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import NoteCard from "../components/NoteCard";
 
 const Notes = () => {
