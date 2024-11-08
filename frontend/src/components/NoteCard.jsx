@@ -5,25 +5,18 @@ import { useNotes } from "../context/NotesContext";
 function NoteCard({ notes }) {
   const { handleCreateFolderDragNDrop, setNotes } = useNotes();
   const [draggedNote, setDraggedNote] = useState();
-  const [isFavorite, setIsFavorite] = useState(false);
-  //   useEffect(() => {
-  //     console.log(notes);
-  //   }, [notes]);
+
+  useEffect(() => {
+    console.log(notes);
+  }, [notes]);
   const handleFavorite = (event, id) => {
     event.preventDefault();
     event.stopPropagation();
-
-    setIsFavorite((prev) => {
-      const updatedFavorite = !prev;
-
-      setNotes((notes) =>
-        notes.map((note) =>
-          note.id === id ? { ...note, favorite: updatedFavorite } : note
-        )
-      );
-
-      return updatedFavorite;
-    });
+    setNotes((notes) =>
+      notes.map((note) =>
+        note.id === id ? { ...note, favorite: !note.favorite } : note
+      )
+    );
   };
   const handleDragStart = (note) => {
     setDraggedNote(note);
