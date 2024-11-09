@@ -48,9 +48,9 @@ function Folders() {
           <h3>No folders yet. Add one?</h3>
         )}
       </div>
-      <div className="">
+      {/* <div className="">
         fix the bug that makes the note in folders not likable
-      </div>
+      </div> */}
       <div className="fixed bottom-4 right-4 h-32">
         <CreateFolderButton />
       </div>
