@@ -6,9 +6,9 @@ function NoteCard({ notes }) {
   const { handleCreateFolderDragNDrop, setNotes } = useNotes();
   const [draggedNote, setDraggedNote] = useState();
 
-  useEffect(() => {
-    console.log(notes);
-  }, [notes]);
+  // useEffect(() => {
+  //   console.log(notes);
+  // }, [notes]);
   const handleFavorite = (event, id) => {
     event.preventDefault();
     event.stopPropagation();
