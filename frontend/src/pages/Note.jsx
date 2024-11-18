@@ -10,7 +10,7 @@ function Note() {
   if (!note) {
     return <div>Note not found!</div>;
   }
-  // adding comment
+  // adding comment! lol oshiiiiii
   return (
     <div className="p-4">
       <BackButton />

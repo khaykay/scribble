@@ -4,6 +4,7 @@ import BackButton from "../components/BackButton";
 import CreateFolderButton from "../components/CreateFolderButton";
 import folderImg from "../assets/folderImg.png";
 import NoteCard from "../components/NoteCard";
+import { Link } from "react-router-dom";
 
 function Folders() {
   const { folders } = useNotes();
@@ -19,8 +20,9 @@ function Folders() {
       <div className="flex flex-wrap gap-x-2 gap-y-3 p-4">
         {folders?.length !== 0 ? (
           folders?.map((folder) => (
-            <div
+            <Link
               key={folder.id}
+              to={`/folder/${folder.id}`}
               className="h-56 w-[calc(50%-4px)] md:w-64 bg-slate-500 p-4 rounded-lg cursor-pointer"
               onClick={() => handleClickToOpenFolder(folder.id)}
             >
@@ -33,7 +35,7 @@ function Folders() {
                   : folder.name.title}
               </h3>
 
-              {openFolderId === folder.id && (
+              {/* {openFolderId === folder.id && (
                 <ul className="mt-2 bg-white p-2 rounded">
                   {folder?.notes?.length !== 0 ? (
                     <NoteCard notes={folder.notes} />
@@ -41,8 +43,8 @@ function Folders() {
                     <div>empty folder</div>
                   )}
                 </ul>
-              )}
-            </div>
+              )} */}
+            </Link>
           ))
         ) : (
           <h3>No folders yet. Add one?</h3>
